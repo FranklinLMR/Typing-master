@@ -61,107 +61,110 @@ for h in range(100):
 
 
 #Retrieving the API
+
+
+Mozambique= requests.get(f"https://random-word-api.herokuapp.com/word?number={chosen}")
+
+
+
+#General Index for everything we gonna retrieve from the API data
+
+index= 0
+
+
 while True:
+    #Extracting the data of the API and verifying everything's working (User-Sever relationship)
+    if Mozambique.status_code == 200:
+        data= Mozambique.json()
+        break
+    else:
+        print("this is not working")
+        
 
-    Mozambique= requests.get(f"https://random-word-api.herokuapp.com/word?number={chosen}")
+
+
+#Round of words without input (first showcase)
+
+typeob(f"{data[index]}", 0.01, color="yellow", on_color="on_dark_grey")
+typeob(f" ", 0)
+for f in range(index+1,len(data)):
+    typeob(f"{data[f]} ", 0.01)
 
 
 
-    #General Index for everything we gonna retrieve from the API data
 
-    index= 0
+mistake_counter = 0
+#Starting a stopwatch
+start_time= time.time()
 
-
-    while True:
-        #Extracting the data of the API and verifying everything's working (User-Sever relationship)
-        if Mozambique.status_code == 200:
-            data= Mozambique.json()
-            break
-        else:
-            print("this is not working")
+#Input, round of words with indications of validity
+while True:
+        for x in range(0,10):
+                print("")
             
-
-
-
-    #Round of words without input (first showcase)
-
-    typeob(f"{data[index]}", 0.01, color="yellow", on_color="on_dark_grey")
-    typeob(f" ", 0)
-    for f in range(index+1,len(data)):
-        typeob(f"{data[f]} ", 0.01)
-
-
-
-
-    mistake_counter = 0
-    #Starting a stopwatch
-    start_time= time.time()
-
-    #Input, round of words with indications of validity
-    while True:
-            for x in range(0,10):
+        lol= input("\n")
+        
+        if index != (chosen-1):
+            if lol == data[index]:
+                index+=1
+                for x in range(0,100):
                     print("")
-                
-            lol= input("\n")
-            
-            if index != (chosen-1):
-                if lol == data[index]:
-                    index+=1
-                    for x in range(0,100):
-                        print("")
+                for l in range(0, index):
+                    typeob(f"{data[l]}", 0, on_color="on_green")
+                    typeob(f" ", 0)
+                typeob(f"{data[index]}", 0, color="yellow", on_color="on_dark_grey")
+                typeob(f" ", 0)
+                for f in range(index+1,len(data)):
+                    typeob(f"{data[f]} ", 0)
+            else:
+                mistake_counter +=1
+                for x in range(0,100):
+                    print("")
+                if index != 0:
                     for l in range(0, index):
                         typeob(f"{data[l]}", 0, on_color="on_green")
                         typeob(f" ", 0)
-                    typeob(f"{data[index]}", 0, color="yellow", on_color="on_dark_grey")
-                    typeob(f" ", 0)
-                    for f in range(index+1,len(data)):
-                        typeob(f"{data[f]} ", 0)
+                    
+                    typeob(f"{data[index]}", 0, on_color="on_red")
+                    typeob(" ",0)
+
                 else:
-                    mistake_counter +=1
-                    for x in range(0,100):
-                        print("")
-                    if index != 0:
-                        for l in range(0, index):
-                            typeob(f"{data[l]}", 0, on_color="on_green")
-                            typeob(f" ", 0)
-                        
-                        typeob(f"{data[index]}", 0, on_color="on_red")
-                        typeob(" ",0)
+                    typeob(f"{data[index]}", 0, on_color="on_red")
+                    typeob(f" ", 0)
+                for f in range(index+1,len(data)):
+                    typeob(f"{data[f]} ", 0)
+        else:
+            break
 
-                    else:
-                        typeob(f"{data[index]}", 0, on_color="on_red")
-                        typeob(f" ", 0)
-                    for f in range(index+1,len(data)):
-                        typeob(f"{data[f]} ", 0)
-            else:
-                break
+#Stopping our stopwatch
 
-    #Stopping our stopwatch
-    
-    end_time = time.time()
-    
-    for x in range(0,100):
-        print("")
-    for l in range(0, index+1):
-        typeob(f"{data[l]}", 0.0001, on_color="on_green")
-        typeob(f" ", 0)
-    for f in range(10):
-        print("")
-    
-    sleep(1)
-    #Gathering time lapsed
-    time_lapsed = end_time - start_time
+end_time = time.time()
 
-    #Final message
-    typeob("Well done", 0.05, color= "yellow")
-    typeob("...", 1)
-    typeoa("You have succesfully completed the round of words in around:",0.05, "yellow")
-    typeoa(f"{round(time_lapsed, 3)} seconds, with a total of {mistake_counter} mistakes", 0.05, "cyan")
-    sleep(3)
-    for h in range(10):
-        print("")
+for x in range(0,100):
+    print("")
+for l in range(0, index+1):
+    typeob(f"{data[l]}", 0.0001, on_color="on_green")
+    typeob(f" ", 0)
+for f in range(10):
+    print("")
 
-    typeoa("Im really tired so restart the code if you want to begin again :)", 0.05)
-    sleep(2)
+sleep(1)
+#Gathering time lapsed
+time_lapsed = end_time - start_time
 
+#Final message
+typeob("Well done", 0.05, color= "yellow")
+typeob("...", 1)
+typeob("You have ",0.05, "yellow")
+typeoa("succesfully completed the round of words in around:",0.05, "green")
+typeob(f"{round(time_lapsed, 3)} seconds, ", 0.05, "cyan")
+typeob(f"with a total of ", 0.05, "yellow")
+typeoa(f"{mistake_counter} mistakes", 0.05, "red")
+sleep(3)
+for h in range(10):
+    print("")
+
+typeoa("Im really tired so restart the code if you want to do it again :)", 0.05)
+sleep(2)
+typeoa("dont want to deal with multiple while loops", 0.05)
 
