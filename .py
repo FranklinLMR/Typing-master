@@ -113,9 +113,4 @@ except:
     typeoa("You have succesfully completed the round of words in around:",0.05)
 
 
-crr=time.time()
-
-print(crr)
-
-
-print(' '.join(data))
+#Hola
