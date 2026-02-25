@@ -1,7 +1,6 @@
 import requests 
 import time 
 import sys
-import keyboard
 from termcolor import colored   
 from time import sleep
 
@@ -94,7 +93,7 @@ while True:
 
 
 
-    
+    mistake_counter = 0
     #Starting a stopwatch
     start_time= time.time()
 
@@ -118,6 +117,7 @@ while True:
                     for f in range(index+1,len(data)):
                         typeob(f"{data[f]} ", 0)
                 else:
+                    mistake_counter +=1
                     for x in range(0,100):
                         print("")
                     if index != 0:
@@ -156,6 +156,12 @@ while True:
     typeob("Well done", 0.05, color= "yellow")
     typeob("...", 1)
     typeoa("You have succesfully completed the round of words in around:",0.05, "yellow")
-    typeoa(f"{round(time_lapsed, 3)} seconds", 0.05, "cyan")
+    typeoa(f"{round(time_lapsed, 3)} seconds, with a total of {mistake_counter} mistakes", 0.05, "cyan")
+    sleep(3)
+    for h in range(10):
+        print("")
+
+    typeoa("Im really tired so restart the code if you want to begin again :)", 0.05)
+    sleep(2)
 
 
