@@ -174,4 +174,3 @@ for h in range(10):
 typeoa("Im really tired so restart the code if you want to do it again :)", 0.05)
 sleep(2)
 typeoa("I do not want to deal with multiple while loops", 0.05)
-
