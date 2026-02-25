@@ -40,10 +40,31 @@ for f in range(0,100):
 
 
 
+typeob("Welcome", 0.05)
+typeoa("...",1)
+
+while True:
+    typeoa("Type the amount of words you want to work with:", 0.05)
+
+    try:
+        chosen = int(input())
+
+        break
+    except:
+        typeoa("That was not a number, try again", 0.08)
+        for f in range(15):
+            print("")
+
+
+for h in range(100):
+    print("")
+
+
+
 #Retrieving the API
 while True:
 
-    Mozambique= requests.get("https://random-word-api.herokuapp.com/word?number=25")
+    Mozambique= requests.get(f"https://random-word-api.herokuapp.com/word?number={chosen}")
 
 
 
@@ -52,12 +73,14 @@ while True:
     index= 0
 
 
-
-    #Extracting the data of the API and verifying everything's working (User-Sever relationship)
-    if Mozambique.status_code == 200:
-        data= Mozambique.json()
-    else:
-        print("this is not working")
+    while True:
+        #Extracting the data of the API and verifying everything's working (User-Sever relationship)
+        if Mozambique.status_code == 200:
+            data= Mozambique.json()
+            break
+        else:
+            print("this is not working")
+            
 
 
 
@@ -82,7 +105,7 @@ while True:
                 
             lol= input("\n")
             
-            if index !=24:
+            if index != (chosen-1):
                 if lol == data[index]:
                     index+=1
                     for x in range(0,100):
@@ -116,18 +139,23 @@ while True:
     #Stopping our stopwatch
     
     end_time = time.time()
+    
     for x in range(0,100):
         print("")
-    for l in range(0, index):
+    for l in range(0, index+1):
         typeob(f"{data[l]}", 0.0001, on_color="on_green")
         typeob(f" ", 0)
+    for f in range(10):
+        print("")
+    
+    sleep(1)
     #Gathering time lapsed
     time_lapsed = end_time - start_time
 
     #Final message
     typeob("Well done", 0.05, color= "yellow")
-    typeob("...",0.5)
-    typeoa("You have succesfully completed the round of words in around:",0.05)
-    typeoa(f"{round(time_lapsed), 2} seconds")
+    typeob("...", 1)
+    typeoa("You have succesfully completed the round of words in around:",0.05, "yellow")
+    typeoa(f"{round(time_lapsed, 3)} seconds", 0.05, "cyan")
 
 
