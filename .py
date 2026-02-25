@@ -107,6 +107,8 @@ while True:
         if index != (chosen-1):
             if lol == data[index]:
                 index+=1
+                typeoa("Correct!", 0.08, "green")
+                sleep(1.5)
                 for x in range(0,100):
                     print("")
                 for l in range(0, index):
@@ -117,6 +119,10 @@ while True:
                 for f in range(index+1,len(data)):
                     typeob(f"{data[f]} ", 0)
             else:
+                typeoa("At least you tried...", 0.08, "red")
+                sleep(1)
+                typeoa("go again!", 0.05, "yellow")
+                sleep(1.5)
                 mistake_counter +=1
                 for x in range(0,100):
                     print("")
@@ -160,11 +166,12 @@ typeoa("succesfully completed the round of words in around:",0.05, "green")
 typeob(f"{round(time_lapsed, 3)} seconds, ", 0.05, "cyan")
 typeob(f"with a total of ", 0.05, "yellow")
 typeoa(f"{mistake_counter} mistakes", 0.05, "red")
+typeoa(f"With a {round((mistake_counter/chosen*100), 3)} % of accuracy")
 sleep(3)
 for h in range(10):
     print("")
 
 typeoa("Im really tired so restart the code if you want to do it again :)", 0.05)
 sleep(2)
-typeoa("dont want to deal with multiple while loops", 0.05)
+typeoa("I do not want to deal with multiple while loops", 0.05)
 
